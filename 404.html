@@ -4,25 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <title>Build an LLM From Scratch</title>
-    <meta name="description" content="A hands-on tutorial series by Moez Ben-Azzouz. Build a Large Language Model from first principles using only Python and NumPy — no PyTorch, no TensorFlow." />
-    <meta name="author" content="Moez Ben-Azzouz" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="/BuildLLM/assets/index-CDsgxi-I.js"></script>
-    <link rel="stylesheet" crossorigin href="/BuildLLM/assets/index-DleIT1Rc.css">
     <script>
-      // Restore route from GitHub Pages 404 redirect
-      (function() {
-        var redirect = sessionStorage.getItem('spa_redirect');
-        if (redirect) {
-          sessionStorage.removeItem('spa_redirect');
-          window.history.replaceState(null, '', '/BuildLLM' + redirect);
-        }
+      // GitHub Pages SPA redirect — Part 1: STORE
+      //
+      // When a user visits a deep link (e.g. /BuildLLM/article/attention),
+      // GitHub Pages has no physical file there, so it serves this 404.html.
+      // We capture the full path/search/hash, store it in sessionStorage,
+      // then redirect to the root index.html which will restore it.
+      //
+      // The redirect preserves the path after the repo name (/BuildLLM).
+      // We encode it as a query string to survive the redirect safely.
+      (function () {
+        var base = '/BuildLLM';
+        var loc = window.location;
+        // Build the path relative to the base, e.g. "/article/attention"
+        var path = loc.pathname.slice(base.length) || '/';
+        var search = loc.search;
+        var hash = loc.hash;
+        // Store the intended destination
+        sessionStorage.setItem('spa_redirect', path + search + hash);
+        // Redirect to the root of the app
+        loc.replace(base + '/?spa=1');
       })();
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- This page is only served by GitHub Pages for unknown paths.
+         The script above immediately redirects to index.html, which
+         restores the original route. Users should never see this content. -->
+    <p>Redirecting&hellip;</p>
   </body>
 </html>
